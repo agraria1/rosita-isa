@@ -1,49 +1,43 @@
-// Elementos
-const vacaInicio = document.getElementById("vaca-inicio");
-const resto = document.getElementById("resto");
-const diapositivas = resto.querySelectorAll(".slide");
-const gracias = document.getElementById("gracias");
+document.addEventListener("DOMContentLoaded", () => {
+  const vacaInicio = document.getElementById("vaca-inicio");
+  const resto = document.getElementById("resto");
+  const gracias = document.getElementById("gracias");
+  let yaMostrado = false;
 
-// Separa "MUCHAS GRACIAS" en letras para que cada una se mueva con su propio retraso
-function animarLetras(elemento) {
-  let indice = 0;
-  const nodos = Array.from(elemento.childNodes);
-  elemento.textContent = "";
+  // Separa "MUCHAS GRACIAS" en letras. Si algo falla, no afecta al resto.
+  try {
+    const html = gracias.innerHTML.split(/<br\s*\/?>/i);
+    let indice = 0;
+    gracias.innerHTML = html
+      .map((linea) =>
+        Array.from(linea.trim())
+          .map((c) => `<span class="letra" style="--i:${indice++}">${c}</span>`)
+          .join("")
+      )
+      .join("<br>");
+    gracias.setAttribute("aria-label", "Muchas gracias");
+  } catch (e) {
+    console.warn("No se pudo animar las letras:", e);
+  }
 
-  nodos.forEach((nodo) => {
-    if (nodo.nodeType === Node.TEXT_NODE) {
-      for (const caracter of nodo.textContent) {
-        const span = document.createElement("span");
-        span.className = "letra";
-        span.style.setProperty("--i", indice++);
-        span.textContent = caracter;
-        elemento.appendChild(span);
-      }
-    } else {
-      elemento.appendChild(nodo.cloneNode(true)); // conserva el <br>
-    }
-  });
-  elemento.setAttribute("aria-label", "Muchas gracias");
-}
-animarLetras(gracias);
+  function mostrarDiapositivas() {
+    if (yaMostrado) return;
+    yaMostrado = true;
 
-// Al tocar la vaquita de la primera diapositiva
-let yaMostrado = false;
-vacaInicio.addEventListener("click", () => {
-  if (yaMostrado) return;
-  yaMostrado = true;
+    vacaInicio.classList.add("tocada");
+    resto.classList.remove("oculto");
 
-  vacaInicio.classList.add("tocada");
-  resto.classList.remove("oculto");
+    const diapositivas = resto.querySelectorAll(".slide");
+    diapositivas.forEach((slide, i) => {
+      slide.style.animationDelay = i * 0.12 + "s";
+      slide.classList.add("entrada");
+    });
 
-  // Las diapositivas van apareciendo una tras otra
-  diapositivas.forEach((slide, i) => {
-    slide.style.animationDelay = `${i * 0.12}s`;
-    slide.classList.add("entrada");
-  });
+    setTimeout(() => {
+      diapositivas[0].scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 400);
+  }
 
-  // Baja suavemente hasta la diapositiva 2
-  setTimeout(() => {
-    diapositivas[0].scrollIntoView({ behavior: "smooth", block: "center" });
-  }, 400);
+  // Funciona con clic, toque en el celular y teclado (Enter / espacio)
+  vacaInicio.addEventListener("click", mostrarDiapositivas);
 });
