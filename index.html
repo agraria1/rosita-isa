@@ -51,7 +51,8 @@
     <!-- 1 · Portada (única visible al inicio) -->
     <section class="slide slide-portada" id="s1">
       <div class="mancha m1"></div><div class="mancha m2"></div>
-      <button class="vaca-boton" id="vaca-inicio" aria-label="Tocá la vaquita para ver las demás diapositivas">
+      <button class="vaca-boton" id="vaca-inicio" type="button" aria-label="Tocá la vaquita para ver las demás diapositivas"
+        onclick="var r=document.getElementById('resto');r.classList.remove('oculto');this.classList.add('tocada');var s=r.querySelectorAll('.slide');for(var i=0;i<s.length;i++){s[i].style.animationDelay=(i*0.12)+'s';s[i].classList.add('entrada');}setTimeout(function(){s[0].scrollIntoView({behavior:'smooth',block:'center'});},400);">
         <svg class="vaca" viewBox="0 0 200 270"><use href="#vaca"/></svg>
         <span class="pista" id="pista">¡Tocá la vaquita!</span>
       </button>
