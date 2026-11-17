@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rosita ISA, la primera vaca bitransgénica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chango&family=Itim&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Vaca reutilizable (se dibuja una sola vez y se usa en todas las diapositivas) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="vaca" viewBox="0 0 200 270">
+      <!-- patas -->
+      <rect x="62" y="225" width="26" height="32" rx="8" fill="#4a3f3a"/>
+      <rect x="112" y="225" width="26" height="32" rx="8" fill="#4a3f3a"/>
+      <!-- cuerpo -->
+      <rect x="48" y="130" width="104" height="110" rx="40" fill="#fffaf6" stroke="#4a3f3a" stroke-width="6"/>
+      <path d="M52 200 q14 -22 30 -6 q4 26 -14 38 q-18 -8 -16 -32z" fill="#4a3f3a"/>
+      <!-- brazos -->
+      <ellipse class="brazo-izq" cx="34" cy="170" rx="18" ry="13" fill="#4a3f3a"/>
+      <ellipse class="brazo-der" cx="166" cy="170" rx="18" ry="13" fill="#4a3f3a"/>
+      <!-- cuernos -->
+      <path d="M62 38 q-14 -14 -6 -26 q12 4 22 22z" fill="#ffb347" stroke="#4a3f3a" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M138 38 q14 -14 6 -26 q-12 4 -22 22z" fill="#ffb347" stroke="#4a3f3a" stroke-width="5" stroke-linejoin="round"/>
+      <!-- orejas -->
+      <ellipse cx="28" cy="82" rx="26" ry="14" transform="rotate(-18 28 82)" fill="#ffa5a5" stroke="#4a3f3a" stroke-width="5"/>
+      <ellipse cx="172" cy="82" rx="26" ry="14" transform="rotate(18 172 82)" fill="#ffa5a5" stroke="#4a3f3a" stroke-width="5"/>
+      <!-- cabeza -->
+      <ellipse cx="100" cy="88" rx="64" ry="56" fill="#fffaf6" stroke="#4a3f3a" stroke-width="6"/>
+      <path d="M44 74 q4 -34 30 -40 q-6 28 -2 52 q-18 -2 -28 -12z" fill="#4a3f3a"/>
+      <!-- ojos -->
+      <path d="M78 76 q8 -6 16 0" fill="none" stroke="#4a3f3a" stroke-width="5" stroke-linecap="round"/>
+      <path d="M112 76 q8 -6 16 0" fill="none" stroke="#4a3f3a" stroke-width="5" stroke-linecap="round"/>
+      <!-- mejillas -->
+      <circle cx="68" cy="98" r="7" fill="#ffa5a5"/>
+      <circle cx="132" cy="98" r="7" fill="#ffa5a5"/>
+      <!-- hocico -->
+      <ellipse cx="100" cy="114" rx="42" ry="28" fill="#fb9a9a" stroke="#4a3f3a" stroke-width="5"/>
+      <circle cx="88" cy="106" r="3" fill="#4a3f3a"/>
+      <circle cx="112" cy="106" r="3" fill="#4a3f3a"/>
+      <path class="boca" d="M84 120 q16 20 32 0z" fill="#e87878" stroke="#4a3f3a" stroke-width="4" stroke-linejoin="round"/>
+    </symbol>
+  </svg>
+
+  <main>
+
+    <!-- 1 · Portada (única visible al inicio) -->
+    <section class="slide slide-portada" id="s1">
+      <div class="mancha m1"></div><div class="mancha m2"></div>
+      <button class="vaca-boton" id="vaca-inicio" aria-label="Tocá la vaquita para ver las demás diapositivas">
+        <svg class="vaca" viewBox="0 0 200 270"><use href="#vaca"/></svg>
+        <span class="pista" id="pista">¡Tocá la vaquita!</span>
+      </button>
+      <div class="portada-texto">
+        <h1 class="titulo-grande">ROSITA<br>ISA</h1>
+        <p class="subtitulo">la primera vaca<br>bitransgénica</p>
+      </div>
+    </section>
+
+    <!-- Resto de las diapositivas: aparecen al tocar la vaca -->
+    <div id="resto" class="oculto">
+
+      <!-- 2 -->
+      <section class="slide" id="s2">
+        <div class="mancha m1"></div><div class="mancha m3"></div>
+        <h2 class="titulo">¿Qué es la<br>transgénesis?</h2>
+        <div class="marco"><p>La transgénesis es el proceso de introducir genes de un organismo en el ADN de otro ser vivo de distinta especie</p></div>
+        <svg class="vaca vaca-esquina der" viewBox="0 0 200 270"><use href="#vaca"/></svg>
+      </section>
+
+      <!-- 3 -->
+      <section class="slide" id="s3">
+        <div class="mancha m1"></div><div class="mancha m3"></div>
+        <h2 class="titulo">Uso en bovinos</h2>
+        <div class="marco"><p>En los bovinos la transgénesis se utiliza principalmente como una tecnología (granjas farmacéuticas) y para la mejora de las propiedades nutricionales de los alimentos</p></div>
+        <svg class="vaca vaca-esquina izq" viewBox="0 0 200 270"><use href="#vaca"/></svg>
+      </section>
+
+      <!-- 4 -->
+      <section class="slide" id="s4">
+        <div class="mancha m1"></div><div class="mancha m3"></div>
+        <h2 class="titulo">La primera vaca<br>bitransgénica</h2>
+        <div class="marco"><p>Se introducen genes que producen proteínas antimicrobianas naturales en la ubre para combatir las infecciones bacterianas comunes en el ganado</p></div>
+        <svg class="vaca vaca-esquina der" viewBox="0 0 200 270"><use href="#vaca"/></svg>
+      </section>
+
+      <!-- 5 -->
+      <section class="slide" id="s5">
+        <div class="mancha m1"></div><div class="mancha m3"></div>
+        <h2 class="titulo">Rosita ISA</h2>
+        <div class="marco dos-col">
+          <p>Fue el primer bovino genéticamente modificado, en el país, que produjo leche similar a la materna</p>
+          <p><strong>ROSITA ISA:</strong> ternera creada por doble transgénesis</p>
+        </div>
+        <svg class="vaca vaca-esquina der" viewBox="0 0 200 270"><use href="#vaca"/></svg>
+      </section>
+
+      <!-- 6 -->
+      <section class="slide" id="s6">
+        <div class="mancha m1"></div><div class="mancha m3"></div>
+        <div class="marco dos-col sin-titulo">
+          <p>Se le incorporaron dos genes humanos que producen las proteínas lisozima y lactoferrina, presentes en la leche materna</p>
+          <p>Mediante una inducción artificial de la lactancia, lograron obtener leche similar a la materna en la ternera</p>
+        </div>
+        <svg class="vaca vaca-esquina der" viewBox="0 0 200 270"><use href="#vaca"/></svg>
+      </section>
+
+      <!-- 7 -->
+      <section class="slide" id="s7">
+        <div class="mancha m1"></div><div class="mancha m3"></div>
+        <h2 class="titulo">Objetivo de su<br>creación</h2>
+        <div class="marco">
+          <div class="fotos">
+            <!-- Reemplazá por tus fotos: poné los archivos en una carpeta "img" -->
+            <img src="img/vaca1.jpg" alt="Vaca blanca con manchas negras" onerror="this.classList.add('sin-foto')">
+            <img src="img/vaca2.jpg" alt="Vaca negra y blanca en el pasto" onerror="this.classList.add('sin-foto')">
+            <img src="img/vaca3.jpg" alt="Vaca marrón y blanca" onerror="this.classList.add('sin-foto')">
+          </div>
+          <p>Fue contribuir a la mejora de la nutrición de los lactantes, ya que estas proteínas cumplen funciones importantes en la leche</p>
+        </div>
+        <svg class="vaca vaca-esquina der" viewBox="0 0 200 270"><use href="#vaca"/></svg>
+      </section>
+
+      <!-- 8 -->
+      <section class="slide" id="s8">
+        <div class="mancha m1"></div><div class="mancha m3"></div>
+        <h2 class="titulo">¿Dónde y en qué<br>año fue creada?</h2>
+        <div class="marco lista">
+          <p>Fue creada en la UNSAM en conjunto con INTA Balcarce</p>
+          <p>Su fecha de nacimiento es el 15/11/2011</p>
+          <p>Obtuvo el premio Innovar 2011 por la obtención de una ternera clonada que producirá leche maternizada</p>
+        </div>
+        <svg class="vaca vaca-esquina izq" viewBox="0 0 200 270"><use href="#vaca"/></svg>
+      </section>
+
+      <!-- 9 · Final -->
+      <section class="slide slide-portada" id="s9">
+        <div class="mancha m1"></div><div class="mancha m2"></div>
+        <svg class="vaca vaca-grande" viewBox="0 0 200 270"><use href="#vaca"/></svg>
+        <div class="portada-texto">
+          <h2 class="titulo-grande gracias" id="gracias">MUCHAS<br>GRACIAS</h2>
+          <p class="subtitulo">Arias Miguel y Almada<br>Morella</p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

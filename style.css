@@ -1,0 +1,216 @@
+:root {
+  --marron: #4a3f3a;
+  --gris: #857370;
+  --crema: #fffaf6;
+  --rosa: #ffa5a5;
+  --hielo: #eef2f8;
+  --fuente-titulo: "Chango", "Impact", sans-serif;
+  --fuente-texto: "Itim", "Comic Sans MS", cursive, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #e9e3df;
+  color: var(--marron);
+  font-family: var(--fuente-texto);
+}
+
+main { display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 24px 12px; }
+#resto { display: flex; flex-direction: column; gap: 24px; width: 100%; align-items: center; }
+.oculto { display: none !important; }
+
+/* ---------- Diapositiva base (16:9) ---------- */
+.slide {
+  position: relative;
+  width: min(100%, 1100px);
+  aspect-ratio: 16 / 9;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4% 6%;
+  container-type: inline-size;
+}
+
+/* Entrada de las diapositivas al tocar la vaquita */
+.slide.entrada { animation: aparecer 0.7s cubic-bezier(.2, 1.4, .4, 1) both; }
+@keyframes aparecer {
+  from { opacity: 0; transform: scale(0.6) translateY(40px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---------- Manchas decorativas ---------- */
+.mancha { position: absolute; background: var(--gris); border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%; opacity: .95; }
+.m1 { width: 24%; height: 24%; top: -8%; left: -4%; }
+.m2 { width: 28%; height: 30%; bottom: -12%; right: -6%; }
+.m3 { width: 18%; height: 18%; bottom: -8%; left: -4%; background: var(--hielo); border: 3px solid var(--gris); }
+
+/* ---------- Texto ---------- */
+.titulo, .titulo-grande { font-family: var(--fuente-titulo); line-height: 1.05; text-align: center; font-weight: 400; }
+.titulo { font-size: 6.4cqw; margin-top: 1%; position: relative; z-index: 1; }
+.titulo-grande { font-size: 13cqw; text-align: left; }
+.subtitulo { font-size: 4.2cqw; line-height: 1.25; }
+
+/* ---------- Marco con la lámina de manchas de vaca ---------- */
+.marco {
+  position: relative;
+  z-index: 1;
+  margin-top: 3%;
+  width: 78%;
+  flex: 1;
+  margin-bottom: 4%;
+  border: 6px solid var(--gris);
+  border-radius: 28px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3% 6%;
+  font-size: 3.1cqw;
+  line-height: 1.35;
+  gap: 4%;
+}
+.marco::before {
+  content: "";
+  position: absolute;
+  top: -2%; bottom: 8%;
+  width: 4.5%;
+  left: -5%;
+  border: 4px solid var(--marron);
+  background:
+    radial-gradient(ellipse 30% 14% at 30% 12%, var(--marron) 98%, transparent),
+    radial-gradient(ellipse 36% 12% at 70% 32%, var(--marron) 98%, transparent),
+    radial-gradient(ellipse 26% 16% at 35% 55%, var(--marron) 98%, transparent),
+    radial-gradient(ellipse 38% 12% at 65% 78%, var(--marron) 98%, transparent),
+    var(--crema);
+}
+.marco.dos-col { text-align: left; }
+.marco.dos-col p { flex: 1; }
+.marco.sin-titulo { margin-top: 8%; font-size: 3.4cqw; }
+.marco.lista { flex-direction: column; gap: 3%; font-size: 2.8cqw; }
+.marco p strong { font-weight: 400; }
+
+/* ---------- Fotos redondas (diapositiva 7) ---------- */
+.marco:has(.fotos) { flex-direction: column; }
+.fotos { display: flex; gap: 4%; justify-content: center; }
+.fotos img {
+  width: 14cqw; height: 14cqw;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--crema);
+}
+.fotos img.sin-foto {
+  background:
+    radial-gradient(ellipse 20% 14% at 30% 30%, var(--marron) 98%, transparent),
+    radial-gradient(ellipse 24% 16% at 68% 55%, var(--marron) 98%, transparent),
+    radial-gradient(ellipse 18% 12% at 35% 78%, var(--marron) 98%, transparent),
+    var(--crema);
+  border: 3px solid var(--marron);
+  color: transparent;
+  font-size: 0;
+}
+
+/* ---------- Vacas ---------- */
+.vaca { width: 100%; height: auto; display: block; overflow: visible; }
+
+.vaca-esquina { position: absolute; bottom: -6%; width: 15%; z-index: 2; transform-origin: 50% 100%; }
+.vaca-esquina.der { right: 2%; }
+.vaca-esquina.izq { left: 2%; }
+
+/* La vaca se mueve solo cuando la diapositiva ya está a la vista */
+#resto .vaca-esquina { animation: saltito 1.4s ease-in-out infinite; }
+#resto .slide:nth-child(even) .vaca-esquina { animation-name: balanceo; animation-duration: 1.8s; }
+#resto .slide:nth-child(3n) .vaca-esquina { animation-delay: -0.5s; }
+
+@keyframes saltito {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  40%      { transform: translateY(-9%) scale(.97, 1.04); }
+  60%      { transform: translateY(-9%) scale(.97, 1.04); }
+  85%      { transform: translateY(0) scale(1.05, .95); }
+}
+@keyframes balanceo {
+  0%, 100% { transform: rotate(-6deg); }
+  50%      { transform: rotate(6deg); }
+}
+
+/* Brazos y boca animados */
+#resto .brazo-izq, #resto .brazo-der { transform-box: fill-box; transform-origin: center; animation: saludo 0.9s ease-in-out infinite alternate; }
+#resto .brazo-der { animation-delay: -0.45s; }
+@keyframes saludo { from { transform: translateY(0) rotate(0); } to { transform: translateY(-22px) rotate(-12deg); } }
+#resto .boca { transform-box: fill-box; transform-origin: top center; animation: hablar 1.1s ease-in-out infinite; }
+@keyframes hablar { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.55); } }
+
+/* ---------- Portada ---------- */
+.slide-portada { flex-direction: row; align-items: center; justify-content: center; gap: 6%; }
+.portada-texto { position: relative; z-index: 1; }
+.portada-texto .subtitulo { margin-top: 4%; }
+
+.vaca-boton {
+  position: relative;
+  z-index: 3;
+  width: 30%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+.vaca-boton .vaca { animation: respirar 2.4s ease-in-out infinite; transform-origin: 50% 100%; transition: transform .2s; }
+.vaca-boton:hover .vaca { transform: scale(1.06) rotate(-3deg); animation: none; }
+.vaca-boton:focus-visible { outline: 4px dashed var(--rosa); outline-offset: 8px; border-radius: 20px; }
+.vaca-boton:active .vaca { transform: scale(.94); }
+@keyframes respirar { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+
+.pista {
+  position: absolute;
+  top: -2%; right: -22%;
+  background: var(--rosa);
+  color: var(--marron);
+  border: 4px solid var(--marron);
+  border-radius: 18px;
+  padding: .3em .7em;
+  font-size: 2.4cqw;
+  white-space: nowrap;
+  animation: latido 1.2s ease-in-out infinite;
+}
+@keyframes latido { 0%, 100% { transform: scale(1) rotate(4deg); } 50% { transform: scale(1.12) rotate(-3deg); } }
+.vaca-boton.tocada .pista { display: none; }
+
+/* ---------- Diapositiva final ---------- */
+.vaca-grande { width: 28%; animation: baile 1.2s ease-in-out infinite; transform-origin: 50% 100%; z-index: 2; position: relative; }
+@keyframes baile {
+  0%, 100% { transform: rotate(-5deg) translateY(0); }
+  50%      { transform: rotate(5deg) translateY(-6%); }
+}
+.gracias { font-size: 11cqw; }
+.gracias .letra {
+  display: inline-block;
+  animation: ola 1.3s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.09s);
+}
+.gracias .letra:nth-child(3n) { color: var(--gris); }
+@keyframes ola {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  30%      { transform: translateY(-14%) rotate(-5deg); }
+  60%      { transform: translateY(2%) rotate(3deg); }
+}
+
+/* ---------- Celulares ---------- */
+@media (max-width: 640px) {
+  main { padding: 12px 8px; gap: 14px; }
+  .slide { border-radius: 12px; }
+  .marco { border-width: 4px; border-radius: 18px; }
+}
+
+/* ---------- Respeto por quienes prefieren menos movimiento ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .slide.entrada { animation-duration: .01s; }
+  .vaca, .vaca *, .pista, .gracias .letra { animation-duration: 6s !important; }
+}
